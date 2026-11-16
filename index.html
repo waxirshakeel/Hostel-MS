@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hostel Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-container">
+
+        <div class="login-left">
+
+            <div class="brand-logo">H</div>
+
+            <h1>Hostel<span>Sphere</span></h1>
+
+            <h2>Welcome to<br>Hostel Management System</h2>
+
+            <p>
+                Manage your hostel smarter, faster and easier.
+                Your complete hostel management solution.
+            </p>
+
+            <div class="login-features">
+                <div>✓ Student Management</div>
+                <div>✓ Room Management</div>
+                <div>✓ Fee & Attendance Tracking</div>
+            </div>
+
+            <div class="login-footer">
+                © 2026 HostelSphere. All rights reserved.
+            </div>
+
+        </div>
+
+        <div class="login-right">
+
+            <div class="login-heading">
+                <span class="admin-tag">ADMIN PORTAL</span>
+
+                <h2>Welcome Back!</h2>
+
+                <p>Please login to your admin account.</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+
+                <label>Username</label>
+
+                <div class="login-input">
+                    <span>👤</span>
+
+                    <input type="text"
+                        id="loginUsername"
+                        placeholder="Enter your username"
+                        required>
+                </div>
+
+                <label>Password</label>
+
+                <div class="login-input">
+                    <span>🔒</span>
+
+                    <input type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required>
+
+                    <button type="button"
+                        class="show-password"
+                        onclick="togglePassword()">
+                        Show
+                    </button>
+                </div>
+
+                <button type="submit" class="login-submit">
+                    Login to Dashboard →
+                </button>
+
+                <p id="loginError"></p>
+
+            </form>
+
+            <div class="secure-text">
+                🔐 Secure Admin Access
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <h2>HostelSphere</h2>
+
+        <ul>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#students">Students</a></li>
+            <a href="#pendingRegistrations">Pending Registrations</a>
+            <li><a href="#rooms">Rooms</a></li>
+            <li><a href="#fees">Fees</a></li>
+            <li><a href="#attendance">Attendance</a></li>
+            <li><a href="#complaints">Complaints</a></li>
+            <li><a href="#" onclick="logoutUser()">Logout</a></li>
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+
+        <!-- Dashboard -->
+        <h1 id="dashboard">Dashboard</h1>
+
+        <p>Welcome to Hostel Management System</p>
+
+
+        <!-- Dashboard Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Students</h3>
+                <p id="totalStudents">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Rooms</h3>
+                <p id="totalRooms">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Available Rooms</h3>
+                <p id="availableRooms">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Monthly Fee Collected</h3>
+                <p id="totalFee">Rs. 0</p>
+            </div>
+
+            <div class="card">
+                <h3>Present Students</h3>
+                <p id="dashboardPresent">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Complaints</h3>
+                <p id="totalComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending Complaints</h3>
+                <p id="pendingComplaints">0</p>
+            </div>
+
+        </div>
+
+
+        <!-- Students Management -->
+        <div class="students-section" id="students">
+
+            <h2>Students Management</h2>
+
+            <input
+                type="text"
+                id="searchStudent"
+                placeholder="Search by Name or Roll Number..."
+                onkeyup="searchStudent()"
+            >
+
+            <button class="add-btn" onclick="showStudentForm()">
+                + Add New Student
+            </button>
+
+            <div class="student-form" id="studentForm" style="display:none;">
+
+                <h3>Student Registration</h3>
+
+                <input type="text" id="studentName" placeholder="Enter Student Name">
+
+                <input type="text" id="rollNumber" placeholder="Enter Roll Number">
+
+                <input type="text" id="roomNumber" placeholder="Enter Room Number (optional)">
+
+                <input type="text" id="department" placeholder="Enter Department">
+                <input type="text" id="contact" placeholder="Enter Contact Number (11 digits)">
+                <input type="text" id="guardianContact" placeholder="Enter Guardian Contact (11 digits)">
+                <input type="email" id="studentEmail" placeholder="Enter Email Address">
+                <select id="studentGender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <textarea id="studentAddress" placeholder="Enter Home Address" rows="3"></textarea>
+
+                <button class="save-btn" onclick="addStudent()">
+                    Save Student
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Room No</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentTableBody"></tbody>
+
+            </table>
+
+        </div>
+<section id="pendingRegistrations" class="content-section">
+    <h2>Pending Registrations</h2>
+    <p>Review and approve new student registrations.</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Department</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="pendingStudentTableBody">
+                <tr>
+                    <td colspan="6">Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+        <!-- Room Management -->
+        <div class="students-section" id="rooms">
+
+            <h2>Room Management</h2>
+
+            <button class="add-btn" onclick="showRoomForm()">
+                + Add New Room
+            </button>
+
+            <input
+                type="text"
+                id="searchRoom"
+                placeholder="Search by Room Number..."
+                onkeyup="searchRoom()"
+            >
+
+            <div class="student-form" id="roomForm" style="display:none;">
+
+                <h3>Add New Room</h3>
+
+                <input type="text" id="roomNo" placeholder="Room Number">
+
+                <input type="number" id="roomCapacity" placeholder="Room Capacity">
+
+                <input type="number" id="occupiedBeds" placeholder="Occupied Beds" value="0">
+
+                <button class="save-btn" onclick="addRoom()">
+                    Save Room
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Capacity</th>
+                        <th>Occupied Beds</th>
+                        <th>Available Beds</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="roomTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Fee Management -->
+        <div class="students-section" id="fees">
+
+            <h2>Monthly Fee Management</h2>
+
+            <button class="add-btn" onclick="showFeeForm()">
+                + Add New Fee
+            </button>
+
+            <input
+                type="text"
+                id="searchFee"
+                placeholder="Search by Student Name or Roll Number..."
+                onkeyup="searchFee()"
+            >
+
+            <div class="student-form" id="feeForm" style="display:none;">
+
+                <h3>Add Student Fee</h3>
+
+                <input type="text" id="feeStudentName" placeholder="Student Name">
+
+                <input type="text" id="feeRollNumber" placeholder="Roll Number">
+
+                <input type="number" id="feeAmount" placeholder="Fee Amount">
+
+                <input type="text" id="feeMonth" placeholder="Month (e.g. November 2026)">
+
+                <select id="feeStatus">
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                </select>
+
+                <button class="save-btn" onclick="addFee()">
+                    Save Fee
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                        <th>Amount</th>
+                        <th>Month</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="feeTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Attendance Management -->
+        <div class="students-section" id="attendance">
+
+            <h2>Attendance Management</h2>
+
+            <button class="add-btn" onclick="showAttendanceForm()">
+                + Mark Attendance
+            </button>
+
+            <input
+                type="text"
+                id="searchAttendance"
+                placeholder="Search by Student Name or Roll Number..."
+                onkeyup="searchAttendance()"
+            >
+
+            <div class="student-form" id="attendanceForm" style="display:none;">
+
+                <h3>Mark Student Attendance</h3>
+
+                <input type="text" id="attendanceName" placeholder="Student Name">
+
+                <input type="text" id="attendanceRoll" placeholder="Roll Number">
+
+                <input type="date" id="attendanceDate">
+
+                <select id="attendanceStatus">
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                </select>
+
+                <button class="save-btn" onclick="addAttendance()">
+                    Save Attendance
+                </button>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Total Present</h3>
+                    <p id="totalPresent">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Absent</h3>
+                    <p id="totalAbsent">0</p>
+                </div>
+
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="attendanceTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Complaints Management -->
+        <div class="students-section" id="complaints">
+
+            <h2>Complaints Management</h2>
+
+            <button class="add-btn" onclick="showComplaintForm()">
+                + Add New Complaint
+            </button>
+
+            <input
+                type="text"
+                id="searchComplaint"
+                placeholder="Search by Student Name or Roll Number..."
+                onkeyup="searchComplaint()"
+            >
+
+            <div class="student-form" id="complaintForm" style="display:none;">
+
+                <h3>Add New Complaint</h3>
+
+                <input type="text" id="complaintName" placeholder="Student Name">
+
+                <input type="text" id="complaintRoll" placeholder="Roll Number">
+
+                <textarea id="complaintDescription" placeholder="Write Complaint Details"></textarea>
+
+                <input type="date" id="complaintDate">
+
+                <select id="complaintStatus">
+                    <option value="Pending">Pending</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+                <button class="save-btn" onclick="addComplaint()">
+                    Save Complaint
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                        <th>Complaint</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="complaintTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- JavaScript File -->
+<script src="script.js"></script>
+
+</body>
+</html>

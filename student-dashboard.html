@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | HostelSphere</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="student-page">
+
+<div class="student-container">
+
+    <h1>Welcome to HostelSphere</h1>
+    <p id="studentWelcome">Welcome, Student!</p>
+
+    <hr>
+
+    <h2>Student Portal</h2>
+
+    <div class="student-dashboard-menu" id="studentDashboardMenu">
+
+        <div class="student-menu-card" onclick="loadMyProfile()">
+            <h3>My Profile</h3>
+            <p>View your personal information.</p>
+        </div>
+
+        <div class="student-menu-card" onclick="loadMyRoom()">
+            <h3>My Room</h3>
+            <p>Check your room details.</p>
+        </div>
+
+        <div class="student-menu-card" onclick="loadMyFees()">
+            <h3>My Fees</h3>
+            <p>Check your hostel fee details.</p>
+        </div>
+
+        <div class="student-menu-card" onclick="loadPaymentHistory()">
+            <h3>Payment History</h3>
+            <p>View your previous payments.</p>
+        </div>
+
+        <div class="student-menu-card" onclick="loadMyAttendance()">
+            <h3>Attendance</h3>
+            <p>View your attendance record.</p>
+        </div>
+
+        <div class="student-menu-card" onclick="loadMyComplaints()">
+            <h3>Complaints</h3>
+            <p>Submit and view complaints.</p>
+        </div>
+
+    </div>
+
+    <!-- My Profile -->
+    <section id="myProfileSection" style="display:none;">
+        <hr>
+        <h2>My Profile</h2>
+        <div id="profileDetails">Loading Profile...</div>
+        <button type="button" onclick="backToDashboard()">Back to Dashboard</button>
+    </section>
+
+    <!-- My Room -->
+    <section id="myRoomSection" style="display:none;">
+        <hr>
+        <h2>My Room Details</h2>
+        <div id="roomDetails">Loading Room Details...</div>
+        <button type="button" onclick="backToDashboard()">Back to Dashboard</button>
+    </section>
+
+    <!-- My Fees -->
+    <section id="myFeesSection" style="display:none;">
+        <hr>
+        <h2>My Fees</h2>
+        <div id="feesDetails">Loading Fee Details...</div>
+        <button type="button" onclick="backToDashboard()">Back to Dashboard</button>
+    </section>
+
+    <!-- Payment History -->
+    <section id="paymentHistorySection" style="display:none;">
+        <hr>
+        <h2>Payment History</h2>
+        <div id="paymentHistoryDetails">Loading Payment History...</div>
+        <button type="button" onclick="backToDashboard()">Back to Dashboard</button>
+    </section>
+
+    <!-- Attendance -->
+    <section id="myAttendanceSection" style="display:none;">
+        <hr>
+        <h2>My Attendance</h2>
+        <div id="attendanceDetails">Loading Attendance...</div>
+        <button type="button" onclick="backToDashboard()">Back to Dashboard</button>
+    </section>
+
+    <!-- Complaints -->
+    <section id="myComplaintsSection" style="display:none;">
+        <hr>
+        <h2>Complaints</h2>
+
+        <h3>Submit a New Complaint</h3>
+
+        <form id="complaintForm">
+            <label for="complaintCategory">Complaint Category</label>
+            <select id="complaintCategory" required>
+                <option value="">Select Category</option>
+                <option value="Room">Room</option>
+                <option value="Food">Food</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Water">Water</option>
+                <option value="Cleanliness">Cleanliness</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <br><br>
+
+            <label for="complaintSubject">Subject</label>
+            <input type="text" id="complaintSubject"
+                   placeholder="Enter complaint subject" required>
+
+            <br><br>
+
+            <label for="complaintDetails">Complaint Details</label>
+            <textarea id="complaintDetails"
+                      placeholder="Write your complaint here..."
+                      rows="5" required></textarea>
+
+            <br><br>
+
+            <button type="submit">Submit Complaint</button>
+        </form>
+
+        <p id="complaintMessage"></p>
+
+        <hr>
+
+        <h3>My Previous Complaints</h3>
+        <div id="complaintsDetails">Loading Complaints...</div>
+
+        <button type="button" onclick="backToDashboard()">Back to Dashboard</button>
+    </section>
+
+    <br>
+    <button type="button" onclick="studentLogout()">Logout</button>
+
+</div>
+
+<script src="/student-dashboard.js"></script>
+
+</body>
+</html>

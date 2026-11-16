@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login | HostelSphere</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="student-page">
+
+    <div class="student-container">
+        <h1>Student Login</h1>
+        <p>Login to your HostelSphere account</p>
+
+        <form id="studentLoginForm">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail"
+                   placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" id="loginPassword"
+                   placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+
+            <p id="loginMessage"></p>
+        </form>
+
+        <p>Don't have an account?
+            <a href="/student">Register Here</a>
+        </p>
+
+        <a href="/">Back to Home</a>
+    </div>
+
+    <script src="/student-login.js"></script>
+</body>
+</html>

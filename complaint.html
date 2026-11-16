@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint | HostelSphere</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="student-page">
+    <div class="student-container">
+        <h1>Submit a Complaint</h1>
+        <p>Tell us about your problem</p>
+        <form id="complaintSubmissionForm">
+            <label>Student Name</label>
+            <input type="text" id="complaintStudentName" placeholder="Enter your name" required>
+            <label>Roll Number</label>
+            <input type="text" id="complaintStudentRoll" placeholder="Enter your roll number" required>
+            <label>Complaint Category</label>
+            <select id="complaintCategory" required>
+                <option value="">Select Complaint Category</option>
+                <option>Room Problem</option>
+                <option>Food Problem</option>
+                <option>Electricity Problem</option>
+                <option>Water Problem</option>
+                <option>Cleanliness Problem</option>
+                <option>Other</option>
+            </select>
+            <label>Complaint Subject</label>
+            <input type="text" id="complaintSubject" placeholder="Enter complaint subject" required>
+            <label>Complaint Details</label>
+            <textarea id="complaintDetails" rows="5" placeholder="Describe your complaint..." required></textarea>
+            <button type="submit">Submit Complaint</button>
+        </form>
+        <p><a href="/student">Student Registration</a> | <a href="/admin">Admin Portal</a></p>
+    </div>
+<script>
+document.getElementById("complaintSubmissionForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const data = {
+        student_name: document.getElementById("complaintStudentName").value.trim(),
+        roll_number: document.getElementById("complaintStudentRoll").value.trim(),
+        category: document.getElementById("complaintCategory").value,
+        subject: document.getElementById("complaintSubject").value.trim(),
+        details: document.getElementById("complaintDetails").value.trim()
+    };
+    const button = this.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+        const response = await fetch("/api/complaints", {
+            method: "POST", headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Complaint could not be submitted.");
+        alert("Your complaint has been submitted successfully!");
+        this.reset();
+    } catch (error) {
+        alert(error.message || "Server connection failed.");
+    } finally {
+        button.disabled = false;
+    }
+});
+</script>
+</body>
+</html>
